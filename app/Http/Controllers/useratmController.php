@@ -59,7 +59,7 @@ class useratmController extends Controller
             'norek.required' => 'No.Rek wajib diisi',
             'norek.numeric' => 'No.Rek wajib dalam angka',
             'norek.unique' => 'No.Rek yang diisikan sudah ada dalam database',
-            'norek.required' => 'Nama wajib diisi',
+            'nama.required' => 'Nama wajib diisi',
             'atmbank.required' => 'ATM Bank wajib diisi',
         ]);
 
@@ -77,7 +77,8 @@ class useratmController extends Controller
             return redirect()->to('useratm')->with('success', 'Berhasil menambahkan data');
         }catch(\Throwable $th){
             DB::rollBack();
-            return 'Eror Mas Bro!!';
+            return 'Eror Bro';
+    
         }
     }
 
@@ -105,7 +106,7 @@ class useratmController extends Controller
     }
 
     /**
-     * the specified resource in storage.
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -118,11 +119,11 @@ class useratmController extends Controller
             'atmbank' => 'required',
         ], [
             'nama.required' => 'Nama wajib diisi',
-            'atmbank.required' => 'ATM Bank wajib diisi',
+            'atmbank.required' => 'Atm Bank wajib diisi',
         ]);
         $data = [
             'nama' => $request->nama,
-            'atmbank' => $request->jurusan,
+            'atmbank' => $request->atmbank,
         ];
         useratm::where('norek', $id)->update($data);
         return redirect()->to('useratm')->with('success', 'Berhasil melakukan update data');
